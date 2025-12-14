@@ -11,14 +11,15 @@ class DbSettings(BaseModel):
     # db_url: str = ...
     pass
 
+
 class ApiPrefix(BaseModel):
     api_prefix: str = '/api'
 
 
 class Settings(BaseSettings):
-    run_confix: RunConfig = RunConfig()
-    db_settings: DbSettings = DbSettings()
-    api_prefix: ApiPrefix = ApiPrefix()
+    run: RunConfig = RunConfig()
+    db: DbSettings = DbSettings()
+    api: ApiPrefix = ApiPrefix()
 
 
 settings = Settings()
