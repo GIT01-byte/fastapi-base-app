@@ -7,7 +7,7 @@ from core.config import settings
 app = FastAPI()
 app.include_router(
     api_router,
-    prefix=settings.api_prefix.api_prefix,
+    prefix=settings.api.api_prefix,
     )
 
 

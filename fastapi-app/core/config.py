@@ -8,12 +8,12 @@ class RunConfig(BaseModel):
 
 
 class DbSettings(BaseModel):
-    # db_url: str = ...
+    # url: str = ...
     pass
 
 
 class ApiPrefix(BaseModel):
-    api_prefix: str = '/api'
+    prefix: str = '/api'
 
 
 class Settings(BaseSettings):
