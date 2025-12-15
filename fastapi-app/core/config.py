@@ -1,5 +1,5 @@
 from pydantic import BaseModel, PostgresDsn
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class RunConfig(BaseModel):
@@ -7,7 +7,11 @@ class RunConfig(BaseModel):
     port: int = 8000
 
 
-class DatabaseConfig(BaseModel):
+class ApiPrefix(BaseModel):
+    prefix: str = '/api'
+
+
+class DatabaseSettings(BaseModel):
     url: PostgresDsn
     echo: bool = False
     echo_pool: bool = False
@@ -15,14 +19,15 @@ class DatabaseConfig(BaseModel):
     max_overflow: int = 10
 
 
-class ApiPrefix(BaseModel):
-    prefix: str = '/api'
-
-
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        case_sensitive=False,
+        env_nested_delimiter="__",
+        env_prefix="APP_CONFIG__",
+    )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
-    db: DatabaseConfig
+    db: DatabaseSettings
 
-
-settings = Settings() # type: ignore
+settings = Settings()
