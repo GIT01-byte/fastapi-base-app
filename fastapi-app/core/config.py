@@ -21,7 +21,7 @@ class DatabaseSettings(BaseModel):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=(".env.template", ".env"),
         case_sensitive=False,
         env_nested_delimiter="__",
         env_prefix="APP_CONFIG__",
@@ -30,4 +30,5 @@ class Settings(BaseSettings):
     api: ApiPrefix = ApiPrefix()
     db: DatabaseSettings
 
-settings = Settings()
+settings = Settings() # type: ignore
+print(f"[INFO]    Using Database url: {settings.db.url}")
