@@ -7,7 +7,7 @@ class RunConfig(BaseModel):
     port: int = 8000
 
 
-class DbSettings(BaseModel):
+class DatabaseConfig(BaseModel):
     url: PostgresDsn
     echo: bool = False
     echo_pool: bool = False
@@ -21,8 +21,8 @@ class ApiPrefix(BaseModel):
 
 class Settings(BaseSettings):
     run: RunConfig = RunConfig()
-    db: DbSettings = DbSettings()
     api: ApiPrefix = ApiPrefix()
+    db: DatabaseConfig
 
 
-settings = Settings()
+settings = Settings() # type: ignore
