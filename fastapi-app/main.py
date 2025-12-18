@@ -10,10 +10,6 @@ from core.models import Base
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("App is started")
-    async with db_helper.engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
-        # await conn.run_sync(Base.metadata.create_all)
-    print("Database is started")
     yield
     print('dispose db engine')
     await db_helper.dispose()
